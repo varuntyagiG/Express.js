@@ -8,7 +8,6 @@ app.listen(3001);
 app.get("/file/:filename", (req, res) => {
   let { filename } = req.params;
   fs.readFile(filename, "utf-8", (err, data) => {
-    console.log(err);
     res.json({
       data,
     });
