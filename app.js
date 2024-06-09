@@ -18,28 +18,51 @@ const user = [
   },
 ];
 
+// get request is used show the data
 app.get("/", (req, res) => {
-  const johnKidneys = user[0].kidneys;
-  const numberOfkidneys = johnKidneys.length;
-  let numberofhealthyKidney = 0;
-  for (let i = 0; i < johnKidneys.length; i++) {
-    if (johnKidneys[i].healthy) {
-      numberofhealthyKidney = numberofhealthyKidney + 1;
+  let totalnoofkidneys = user[0].kidneys.length;
+  let totalnoofhealthykidneys = 0;
+  for (let i = 0; i < totalnoofkidneys; i++) {
+    if (user[0].kidneys[i].healthy === true) {
+      totalnoofhealthykidneys = totalnoofhealthykidneys + 1;
     }
-    const numberofunhealthykidney = numberOfkidneys - numberofhealthyKidney;
-    res.json({
-      numberOfkidneys,
-      numberofhealthyKidney,
-      numberofunhealthykidney,
-    });
   }
+  let totalnoofunhealthykidney = totalnoofkidneys - totalnoofhealthykidneys;
+  res.json({
+    totalnoofkidneys,
+    totalnoofhealthykidneys,
+    totalnoofunhealthykidney,
+  });
 });
 
+// Post request is used to add data
 app.post("/", (req, res) => {
   const { isHealthy } = req.body;
   console.log(isHealthy);
   user[0].kidneys.push({
     healthy: isHealthy,
   });
-  res.send("we push an isHealthy kidney in user through req.body from postman");
+  res.send("Done!");
+});
+
+// put request to upgrade data
+app.put("/", (req, res) => {
+  for (let i = 0; i < user[0].kidneys.length; i++) {
+    user[0].kidneys[i].healthy = true;
+  }
+  res.send("Done");
+});
+
+// remove all the unhealthy kidneys
+app.delete("/", (req, res) => {
+  let newKidneys = [];
+  for (let i = 0; i < user[0].kidneys.length; i++) {
+    if (user[0].kidneys[i].healthy) {
+      newKidneys.push({
+        healthy: true,
+      });
+    }
+    user[0].kidneys = newKidneys;
+    res.send("Delete Req. work");
+  }
 });
