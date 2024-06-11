@@ -47,14 +47,9 @@ let wrapAsync = (fn) => {
   };
 };
 
-app.get(
-  "/healthy-check",
-  UserCheckUp,
-  kidneyCheckup,
-  wrapAsync((req, res) => {
-    res.send("Check-up");
-  }),
-);
+app.get("/healthy-check", UserCheckUp, kidneyCheckup, (req, res) => {
+  res.send("Check-up");
+});
 
 // kidneyCheckup do not work in this route
 app.post(
