@@ -10,6 +10,7 @@ app.post("/healthy-check", (req, res) => {
   const { kidneys } = req.body;
   const response = schema.safeParse(kidneys);
   if (!response.success) {
+    console.log(response.success);
     throw new Error("Wrong-input");
   } else {
     res.json({
@@ -18,6 +19,7 @@ app.post("/healthy-check", (req, res) => {
   }
 });
 
+// Custom Error Handlor
 app.use(function (err, req, res, next) {
   res.status(500).json({
     message: "Some-Error Occured",
