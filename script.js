@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 let port = 3000;
 
 app.listen(port);
+
+app.use(cors());
 
 function calculate(n) {
   let ans = 0;
@@ -12,6 +15,14 @@ function calculate(n) {
   }
   return ans;
 }
+
+app.get("/xyz", (req, res) => {
+  let a = parseInt(req.query.a);
+  let b = parseInt(req.query.b);
+  const sum = a + b;
+  console.log(sum);
+  res.send(sum.toString());
+});
 
 app.get("/", (req, res) => {
   let { n } = req.query;
