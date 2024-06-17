@@ -16,12 +16,23 @@ function calculate(n) {
   return ans;
 }
 
+// to calculate sum
 app.get("/xyz", (req, res) => {
   let a = parseInt(req.query.a);
   let b = parseInt(req.query.b);
   const sum = a + b;
   console.log(sum);
   res.send(sum.toString());
+});
+
+// to calculate simple interest
+app.get("/simpleinterest", function (req, res) {
+  let P = parseInt(req.query.p);
+  let R = parseInt(req.query.r);
+  let T = parseInt(req.query.t);
+  let SI = (P * R * T) / 100;
+  console.log(SI);
+  res.send(SI.toString());
 });
 
 app.get("/", (req, res) => {
