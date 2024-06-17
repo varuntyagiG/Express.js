@@ -32,7 +32,7 @@ app.get("/simpleinterest", function (req, res) {
   let T = parseInt(req.query.t);
   let SI = (P * R * T) / 100;
   console.log(SI);
-  res.send(SI.toString());
+  res.send(`The Simple interset is: ${SI.toString()}`);
 });
 
 app.get("/", (req, res) => {
